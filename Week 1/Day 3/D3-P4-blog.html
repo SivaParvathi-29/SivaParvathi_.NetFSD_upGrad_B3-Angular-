@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+
+    <style>
+        /* Reset default margin */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        /* Header */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Main Section */
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns desktop */
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        /* Blog Card */
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .card button {
+            margin-top: 1rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Tablet View */
+        @media (max-width: 900px) {
+            .blog-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile View */
+        @media (max-width: 600px) {
+            .blog-container {
+                grid-template-columns: 1fr; /* Single column */
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>My Modern Blog</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="blog-container">
+
+        <div class="card">
+            <h2>Web Design Trends</h2>
+            <p>Discover the latest trends in modern web design and how to create visually stunning websites.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="card">
+            <h2>CSS Grid vs Flexbox</h2>
+            <p>Learn the difference between CSS Grid and Flexbox and when to use each layout system.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="card">
+            <h2>Responsive Design Tips</h2>
+            <p>Make your websites look perfect on desktop, tablet, and mobile screens using responsive design.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="card">
+            <h2>Improving User Experience</h2>
+            <p>Understand the key principles of good user experience and how to apply them in your projects.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="card">
+            <h2>Modern UI Components</h2>
+            <p>Explore beautiful and functional UI components that improve engagement and usability.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="card">
+            <h2>Performance Optimization</h2>
+            <p>Speed up your website by applying best practices for performance optimization.</p>
+            <button>Read More</button>
+        </div>
+
+    </main>
+
+</body>
+</html>
+
+
+    <div class="card">
+        <h2>Web Design</h2>
+        <p>Learn how to design simple websites step by step.</p>
+        <button>Read More</button>
+    </div>
+
+</body>
+</html>
+

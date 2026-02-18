@@ -1,0 +1,47 @@
+/* Style heading */
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+/* Style paragraph */
+p {
+    color: darkgray;
+    font-size: 18px;
+}
+
+/* Section background and border */
+.section-box {
+    background-color: lightyellow;
+    border: 2px solid orange;
+    padding: 20px;
+    margin: 20px;
+}
+
+/* Box model example */
+.box {
+    background-color: lightblue;
+    border: 3px solid black;
+    padding: 30px;   /* space inside */
+    margin: 40px;    /* space outside */
+}
+
+/* Form styling */
+form {
+    border: 2px solid gray;
+    padding: 20px;
+    width: 300px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+}
