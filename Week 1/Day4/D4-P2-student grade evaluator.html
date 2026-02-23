@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Evaluation</title>
+</head>
+<body>
+
+    <h1> Student Performance Evaluation </h1>
+    <hr>
+
+    <p id="result"></p>
+
+    <script>
+        let marks = 68;
+        let grade;
+
+        if (marks >= 75) {
+            grade = "A";
+        }
+        else if (marks >= 60) {
+            grade = "B";
+        }
+        else if (marks >= 40) {
+            grade = "C";
+        }
+        else {
+            grade = "Fail";
+        }
+
+        document.getElementById("result").innerHTML =
+            "Marks: " + marks + "<br>Grade: " + grade;
+
+        console.log("Marks: " + marks + " Grade: " + grade);
+    </script>
+
+</body>
+</html>
