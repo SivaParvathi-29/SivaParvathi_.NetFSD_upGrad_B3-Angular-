@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information Display</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User Information</h2>
+
+    <button onclick="displayUserInfo(user)">Show User Info</button>
+
+    <div id="output"></div>
+
+    <script>
+
+        // JavaScript Object
+        var user = {
+            name: "Rahul",
+            age: 25,
+            city: "Hyderabad"
+        };
+
+        // Function that accepts object as parameter
+        function displayUserInfo(userObj) {
+
+            // Access properties using dot notation
+            var nameText = "Name: " + userObj.name;
+            var ageText = "Age: " + userObj.age;
+            var cityText = "City: " + userObj.city;
+
+            // Update DOM dynamically
+            document.getElementById("output").innerHTML =
+                "<p>" + nameText + "</p>" +
+                "<p>" + ageText + "</p>" +
+                "<p>" + cityText + "</p>";
+        }
+
+    </script>
+
+</body>
+</html>

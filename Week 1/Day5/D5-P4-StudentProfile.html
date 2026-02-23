@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Student Profile System</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #profileCard {
+            width: 300px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 6px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Student Profile System</h2>
+
+    <div id="profileCard"></div>
+
+    <input type="number" id="newMarksInput" placeholder="Enter new marks">
+    <br>
+    <button id="updateBtn">Update Marks</button>
+
+    <script>
+
+        // Global student object
+        var student = {
+            name: "Anjali",
+            rollNo: 101,
+            marks: 85
+        };
+
+        // Function to display student profile
+        function updateStudentProfile(studentObj) {
+
+            var content = 
+                "<h3>Student Profile</h3>" +
+                "<p><strong>Name:</strong> " + studentObj.name + "</p>" +
+                "<p><strong>Roll No:</strong> " + studentObj.rollNo + "</p>" +
+                "<p><strong>Marks:</strong> " + studentObj.marks + "</p>";
+
+            document.getElementById("profileCard").innerHTML = content;
+        }
+
+        // Function to update marks
+        function updateMarks(newMarks) {
+            student.marks = newMarks;  // Update object value using parameter
+            updateStudentProfile(student);  // Refresh display
+        }
+
+        // Event Listener (No inline JS)
+        document.getElementById("updateBtn").addEventListener("click", function() {
+            var newMarksValue = document.getElementById("newMarksInput").value;
+            if (newMarksValue !== "") {
+                updateMarks(newMarksValue);
+            }
+        });
+
+        // Initial display
+        updateStudentProfile(student);
+
+    </script>
+
+</body>
+</html>
