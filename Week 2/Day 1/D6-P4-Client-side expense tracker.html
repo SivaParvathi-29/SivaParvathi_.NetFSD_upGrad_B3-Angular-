@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .wrapper {
+            width: 700px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 32%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .addBtn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .viewBtn {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .deleteBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 8px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <h2>Expense Tracker</h2>
+
+    
+    <input type="text" id="title" placeholder="Expense Title">
+    <input type="number" id="amount" placeholder="Amount">
+    <input type="date" id="date">
+
+    <br>
+
+   
+    <button class="addBtn" onclick="addExpense()">Add Expense</button>
+    <button class="viewBtn" onclick="viewExpenses()">View Expenses</button>
+
+    <br><br>
+
+    <input type="number" id="deleteId" placeholder="Enter ID to Delete">
+    <button class="deleteBtn" onclick="deleteExpense()">Delete</button>
+
+   
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="expenseTable"></tbody>
+    </table>
+
+</div>
+
+<script>
+
+   
+    var db = openDatabase('ExpenseDB', '1.0', 'Expense Database', 2 * 1024 * 1024);
+
+    
+    db.transaction(function(tx) {
+        tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, amount REAL, date TEXT)"
+        );
+    }, function(error) {
+        console.log("Transaction Error: " + error.message);
+    });
+
+    
+    function addExpense() {
+
+        var title = document.getElementById("title").value;
+        var amount = document.getElementById("amount").value;
+        var date = document.getElementById("date").value;
+
+        if(title === "" || amount === "" || date === "") {
+            alert("Please fill all fields");
+            return;
+        }
+
+        db.transaction(function(tx) {
+
+            tx.executeSql(
+                "INSERT INTO expenses (title, amount, date) VALUES (?, ?, ?)",
+                [title, amount, date],
+                function() {
+                    alert("Expense Added Successfully");
+                    viewExpenses();
+                },
+                function(tx, error) {
+                    console.log("Insert Error: " + error.message);
+                }
+            );
+
+        }, function(error) {
+            console.log("Transaction Error: " + error.message);
+        });
+    }
+
+    
+    function viewExpenses() {
+
+        db.transaction(function(tx) {
+
+            tx.executeSql(
+                "SELECT * FROM expenses",
+                [],
+                function(tx, result) {
+
+                    var table = document.getElementById("expenseTable");
+                    table.innerHTML = "";
+
+                    for(var i = 0; i < result.rows.length; i++) {
+
+                        var row = result.rows.item(i);
+
+                        table.innerHTML +=
+                            "<tr>" +
+                            "<td>" + row.id + "</td>" +
+                            "<td>" + row.title + "</td>" +
+                            "<td>" + row.amount + "</td>" +
+                            "<td>" + row.date + "</td>" +
+                            "</tr>";
+                    }
+                },
+                function(tx, error) {
+                    console.log("Select Error: " + error.message);
+                }
+            );
+
+        });
+    }
+
+    
+    function deleteExpense() {
+
+        var id = document.getElementById("deleteId").value;
+
+        if(id === "") {
+            alert("Enter ID to delete");
+            return;
+        }
+
+        db.transaction(function(tx) {
+
+            tx.executeSql(
+                "DELETE FROM expenses WHERE id = ?",
+                [id],
+                function() {
+                    alert("Expense Deleted");
+                    viewExpenses();
+                },
+                function(tx, error) {
+                    console.log("Delete Error: " + error.message);
+                }
+            );
+
+        }, function(error) {
+            console.log("Transaction Error: " + error.message);
+        });
+    }
+
+</script>
+
+</body>
+</html>
