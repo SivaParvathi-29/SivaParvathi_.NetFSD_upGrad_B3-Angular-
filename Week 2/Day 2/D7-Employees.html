@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Filter System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            width: 75%;
+            margin: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #5a67d8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6e6ff;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Employee Management System</h2>
+
+    <div class="controls">
+        <select id="jobSelect">
+            <option value="All">All Employees</option>
+            <option value="Manager">Manager</option>
+            <option value="Salesman">Salesman</option>
+            <option value="Clerk">Clerk</option>
+        </select>
+
+        <button onclick="showEmployees()">Show Emps</button>
+    </div>
+
+    <table id="empTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+<script>
+
+const employees = [
+    { id: 101, name: "Ravi", job: "Manager", salary: 60000 },
+    { id: 102, name: "Sita", job: "Salesman", salary: 30000 },
+    { id: 103, name: "Arjun", job: "Clerk", salary: 20000 },
+    { id: 104, name: "Siva", job: "Manager", salary: 65000 },
+    { id: 105, name: "Kiran", job: "Salesman", salary: 32000 }
+];
+
+function showEmployees() {
+
+    const selectedJob = document.getElementById("jobSelect").value;
+    const tableBody = document.querySelector("#empTable tbody");
+    tableBody.innerHTML = "";
+
+    const filteredEmployees = selectedJob === "All"
+        ? employees
+        : employees.filter(emp => emp.job === selectedJob);
+
+    filteredEmployees.forEach(emp => {
+        const row = `
+            <tr>
+                <td>${emp.id}</td>
+                <td>${emp.name}</td>
+                <td>${emp.job}</td>
+                <td>₹${emp.salary}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+</script>
+
+</body>
+</html>
