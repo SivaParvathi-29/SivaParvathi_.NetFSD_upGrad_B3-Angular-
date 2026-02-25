@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Async Weather App</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: skyblue;   
+        text-align: center;
+        padding: 40px;
+        color: black;
+    }
+
+    .weather-box {
+        background-color: white;   
+        padding: 20px;
+        border-radius: 10px;
+        width: 350px;
+        margin: auto;
+        border: 2px solid gray;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+    }
+
+    .promise-btn { background-color: orange; }
+    .async-btn { background-color: green; }
+
+    #output {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Weather Report App</h1>
+
+<div class="weather-box">
+    <button class="promise-btn" onclick="getWeatherWithPromise()">
+        Get Weather (Promises)
+    </button>
+
+    <button class="async-btn" onclick="getWeatherAsync()">
+        Get Weather (Async/Await)
+    </button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+
+const latitude = 17.3850;
+const longitude = 78.4867;
+
+const apiURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+
+const outputDiv = document.getElementById("output");
+
+
+const getWeatherWithPromise = () => {
+
+    outputDiv.innerHTML = "Loading weather data...";
+
+    fetch(apiURL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch weather data");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const weather = data.current_weather;
+
+            outputDiv.innerHTML = `
+                <h3>Weather Report</h3>
+                Temperature: ${weather.temperature}°C <br>
+                Wind Speed: ${weather.windspeed} km/h <br>
+                Time: ${weather.time}
+            `;
+        })
+        .catch(error => {
+            outputDiv.innerHTML = `Error: ${error.message}`;
+            console.error(error);
+        });
+};
+
+const getWeatherAsync = async () => {
+
+    outputDiv.innerHTML = "Loading weather data...";
+
+    try {
+        const response = await fetch(apiURL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch weather data");
+        }
+
+        const data = await response.json();
+        const weather = data.current_weather;
+
+        outputDiv.innerHTML = `
+            <h3>Weather Report</h3>
+            Temperature: ${weather.temperature}°C <br>
+            Wind Speed: ${weather.windspeed} km/h <br>
+            Time: ${weather.time}
+        `;
+
+    } catch (error) {
+        outputDiv.innerHTML = `Error: ${error.message}`;
+        console.error("Async Error:", error);
+    }
+};
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Async Task Manager</title>
+
+<style>
+body {
+    background-color: lightblue;
+    text-align: center;
+    padding: 30px;
+}
+
+.container {
+    background-color: white;
+    padding: 25px;
+    width: 420px;
+    margin: auto;
+    border-radius: 10px;
+    border: 2px solid navy;
+}
+
+h2 {
+    color: navy;
+}
+
+input {
+    padding: 8px;
+    width: 70%;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+button {
+    margin: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.callback-btn {
+    background-color: orange;
+}
+
+.promise-btn {
+    background-color: blue;
+}
+
+.async-btn {
+    background-color: green;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#output {
+    margin-top: 15px;
+    text-align: left;
+    background-color: lightyellow;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Task Manager</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task" />
+    <br><br>
+
+    <button class="callback-btn" onclick="runCallback()">Callback</button>
+    <button class="promise-btn" onclick="runPromise()">Promise</button>
+    <button class="async-btn" onclick="runAsync()">Async/Await</button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+
+let tasks = [];
+
+const output = document.getElementById("output");
+const input = document.getElementById("taskInput");
+
+const displayTasks = (tasksArray) => {
+
+    if (tasksArray.length === 0) {
+        output.innerHTML = "<span style='color:red'>No tasks available.</span>";
+        return;
+    }
+
+    output.innerHTML = tasksArray
+        .map((task, index) => `${index}. ${task}`)
+        .join("<br>");
+};
+
+const addTaskCallback = (task, callback) => {
+    setTimeout(() => {
+        tasks.push(task);
+        callback(`Task "${task}" added (Callback).`);
+    }, 1000);
+};
+
+const listTasksCallback = (callback) => {
+    setTimeout(() => {
+        callback(tasks);
+    }, 1000);
+};
+
+const runCallback = () => {
+    const task = input.value;
+
+    addTaskCallback(task, () => {
+        listTasksCallback(displayTasks);
+    });
+};
+
+const addTaskPromise = (task) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (!task) {
+                reject("Task cannot be empty.");
+            } else {
+                tasks.push(task);
+                resolve();
+            }
+        }, 1000);
+    });
+};
+
+const listTasksPromise = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(tasks);
+        }, 1000);
+    });
+};
+
+const runPromise = () => {
+    const task = input.value;
+
+    addTaskPromise(task)
+        .then(() => listTasksPromise())
+        .then(displayTasks)
+        .catch(error => {
+            output.innerHTML = `<span style="color:red">Error: ${error}</span>`;
+        });
+};
+const runAsync = async () => {
+    const task = input.value;
+
+    try {
+        await addTaskPromise(task);
+        const updatedTasks = await listTasksPromise();
+        displayTasks(updatedTasks);
+    } catch (error) {
+        output.innerHTML = `<span style="color:red">Error: ${error}</span>`;
+    }
+};
+
+</script>
+
+</body>
+</html>
