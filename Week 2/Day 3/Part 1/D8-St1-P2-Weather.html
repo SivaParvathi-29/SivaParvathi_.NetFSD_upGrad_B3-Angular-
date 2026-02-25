@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Async Weather App</title>
+
+<style>
+    body {
+        background-color: skyblue;   
+        text-align: center;
+        padding: 40px;
+        color: black;
+    }
+
+    .weather-box {
+        background-color: white;   
+        padding: 20px;
+        border-radius: 10px;
+        width: 350px;
+        margin: auto;
+        border: 2px solid gray;
+    }
+
+    select {
+        padding: 8px;
+        margin: 10px;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+    }
+
+    .promise-btn { background-color: orange; }
+    .async-btn { background-color: green; }
+
+    #output {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Weather Report App</h1>
+
+<div class="weather-box">
+
+    <select id="citySelect">
+        <option value="guntur">Guntur</option>
+        <option value="vijayawada">Vijayawada</option>
+        <option value="hyderabad">Hyderabad</option>
+        <option value="chennai">Chennai</option>
+        <option value="bangalore">Bangalore</option>
+    </select>
+
+    <br>
+
+    <button class="promise-btn" onclick="getWeatherWithPromise()">
+        Get Weather (Promises)
+    </button>
+
+    <button class="async-btn" onclick="getWeatherAsync()">
+        Get Weather (Async/Await)
+    </button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+
+const cities = {
+    guntur: { lat: 16.3067, lon: 80.4365 },
+    vijayawada: { lat: 16.5062, lon: 80.6480 },
+    hyderabad: { lat: 17.3850, lon: 78.4872 },
+    chennai: { lat: 13.0827, lon: 80.2707 },
+    bangalore: { lat: 12.9716, lon: 77.5946 }
+};
+
+const outputDiv = document.getElementById("output");
+const citySelect = document.getElementById("citySelect");
+
+
+const getWeatherWithPromise = () => {
+
+    const selectedCity = citySelect.value;
+    const { lat, lon } = cities[selectedCity];
+
+    const apiURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+    outputDiv.innerHTML = "Loading temperature...";
+
+    fetch(apiURL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch weather data");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const temperature = data.current_weather.temperature;
+
+            outputDiv.innerHTML = `
+                ${selectedCity.toUpperCase()} 🌡 Temperature: ${temperature}°C
+            `;
+        })
+        .catch(error => {
+            outputDiv.innerHTML = `Error: ${error.message}`;
+        });
+};
+
+
+const getWeatherAsync = async () => {
+
+    const selectedCity = citySelect.value;
+    const { lat, lon } = cities[selectedCity];
+
+    const apiURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+    outputDiv.innerHTML = "Loading temperature...";
+
+    try {
+        const response = await fetch(apiURL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch weather data");
+        }
+
+        const data = await response.json();
+        const temperature = data.current_weather.temperature;
+
+        outputDiv.innerHTML = `
+            ${selectedCity.toUpperCase()} 🌡 Temperature: ${temperature}°C
+        `;
+
+    } catch (error) {
+        outputDiv.innerHTML = `Error: ${error.message}`;
+    }
+};
+
+</script>
+
+</body>
+</html>
