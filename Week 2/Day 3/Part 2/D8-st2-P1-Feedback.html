@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Feedback Page</title>
+
+<style>
+body {
+    background-color: lightgray;
+    text-align: center;
+    padding: 40px;
+}
+
+.container {
+    background-color: white;
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+button {
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Customer Feedback</h2>
+
+    <textarea id="feedbackInput" rows="4" cols="40" placeholder="Enter your feedback here..."></textarea>
+    <br><br>
+
+    <button id="submitBtn">Submit Feedback</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+
+const button = document.getElementById("submitBtn");
+const messageDiv = document.getElementById("message");
+const feedbackInput = document.getElementById("feedbackInput");
+
+button.addEventListener("click", () => {
+
+    const feedbackText = feedbackInput.value.trim();
+
+    if (feedbackText === "") {
+        messageDiv.textContent = "Please enter feedback before submitting.";
+        messageDiv.style.color = "red";
+        return;
+    }
+
+    messageDiv.textContent = `Thank you for your feedback!`;
+    messageDiv.style.color = "green";
+
+    feedbackInput.value = "";
+});
+
+</script>
+
+</body>
+</html>

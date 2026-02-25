@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mini Product Search</title>
+
+<style>
+body {
+    background-color: lightgray;
+    text-align: center;
+    padding: 40px;
+}
+
+.container {
+    background-color: white;
+    width: 450px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid navy;
+}
+
+h2 {
+    color: navy;
+}
+
+input {
+    padding: 8px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: lightyellow;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.no-results {
+    color: red;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Product Search</h2>
+
+    <input type="text" id="searchInput" placeholder="Search products...">
+
+    <ul id="productList"></ul>
+</div>
+
+<script>
+
+const state = {
+    products: [
+        "Laptop",
+        "Smartphone",
+        "Headphones",
+        "Keyboard",
+        "Mouse",
+        "Monitor",
+        "Tablet",
+        "Smartwatch"
+    ],
+    filteredProducts: []
+};
+
+const searchInput = document.getElementById("searchInput");
+const productList = document.getElementById("productList");
+
+
+const renderProducts = (products) => {
+
+    productList.innerHTML = "";
+
+    if (products.length === 0) {
+        productList.innerHTML = `<li class="no-results">No Results Found</li>`;
+        return;
+    }
+
+    products.forEach(product => {
+        const li = document.createElement("li");
+        li.textContent = product;
+        productList.appendChild(li);
+    });
+};
+
+const filterProducts = (searchTerm) => {
+
+    state.filteredProducts = state.products.filter(product =>
+        product.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    renderProducts(state.filteredProducts);
+};
+
+searchInput.addEventListener("input", (event) => {
+    const searchTerm = event.target.value.trim();
+    filterProducts(searchTerm);
+});
+
+productList.addEventListener("click", (event) => {
+
+    if (event.target.tagName === "LI" &&
+        !event.target.classList.contains("no-results")) {
+
+        alert(`You selected: ${event.target.textContent}`);
+    }
+});
+
+state.filteredProducts = [...state.products];
+renderProducts(state.filteredProducts);
+
+</script>
+
+</body>
+</html>

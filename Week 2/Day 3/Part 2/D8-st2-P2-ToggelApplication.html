@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog Theme Toggle</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.container {
+    padding: 40px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <button id="themeToggle">Switch Theme</button>
+
+    <h1>My Blog</h1>
+    <p>
+        Welcome to my blog website. This is a simple demo showing how
+        Light Mode and Dark Mode can be switched dynamically.
+    </p>
+</div>
+
+<script>
+
+const body = document.body;
+const toggleButton = document.getElementById("themeToggle");
+
+const applySavedTheme = () => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+        body.className = savedTheme;
+    } else {
+        body.className = "light-mode";
+    }
+};
+
+const toggleTheme = () => {
+
+    if (body.classList.contains("light-mode")) {
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark-mode");
+    } else {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        localStorage.setItem("theme", "light-mode");
+    }
+};
+
+toggleButton.addEventListener("click", toggleTheme);
+
+applySavedTheme();
+
+</script>
+
+</body>
+</html>
