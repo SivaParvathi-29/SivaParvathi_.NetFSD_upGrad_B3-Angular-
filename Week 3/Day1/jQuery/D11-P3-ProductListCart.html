@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List - Add to Cart</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        .header {
+            background-color: blue;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .container {
+            width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product {
+            border: 1px solid gray;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .product img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-left: 10px;
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    🛒 Cart Items: <span id="cartCount">0</span>
+</div>
+
+<div class="container">
+
+    <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Laptop">
+        <div class="product-details">
+            <h3>Laptop</h3>
+            <p>Price: ₹50,000</p>
+            <button class="addBtn">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Smartphone">
+        <div class="product-details">
+            <h3>Smartphone</h3>
+            <p>Price: ₹20,000</p>
+            <button class="addBtn">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Headphones">
+        <div class="product-details">
+            <h3>Headphones</h3>
+            <p>Price: ₹2,000</p>
+            <button class="addBtn">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/120" alt="Smart Watch">
+        <div class="product-details">
+            <h3>Smart Watch</h3>
+            <p>Price: ₹5,000</p>
+            <button class="addBtn">Add to Cart</button>
+            <span class="message"></span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    var count = 0;
+
+    $(".addBtn").click(function(){
+
+        count++;
+        $("#cartCount").text(count);
+        $(this).prop("disabled", true);
+        $(this).attr("title", "Already Added");
+        $(this).siblings(".message").text("✔ Added to cart");
+
+    });
+
+});
+</script>
+
+</body>
+</html>
