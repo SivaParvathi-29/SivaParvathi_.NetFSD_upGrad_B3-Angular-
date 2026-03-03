@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Toggle Section</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .faq-item {
+            margin-bottom: 10px;
+        }
+
+        .question {
+            background-color: burlywood;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .answer {
+            display: none;
+            padding: 10px;
+            background-color: lightyellow;
+        }
+
+        .active {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="question">1. What courses do you offer?</div>
+        <div class="answer">We offer Web Development, Python, Java, and Data Science courses.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">2. What is the course duration?</div>
+        <div class="answer">Course duration ranges from 2 to 6 months depending on the program.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">3. Do you provide certificates?</div>
+        <div class="answer">Yes, certificates are provided after successful course completion.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">4. Is there placement support?</div>
+        <div class="answer">Yes, we provide placement assistance and interview preparation.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">5. Are online classes available?</div>
+        <div class="answer">Yes, both online and offline classes are available.</div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $(".question").click(function(){
+        $(".answer").hide();
+        $(this).next(".answer").slideToggle();
+        $(".question").not(this).removeClass("active");
+        $(this).toggleClass("active");
+    });
+
+});
+</script>
+
+</body>
+</html>
