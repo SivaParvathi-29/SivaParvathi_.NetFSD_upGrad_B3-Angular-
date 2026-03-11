@@ -13,9 +13,9 @@ class Program
         Console.Write("Enter Experience (years): ");
         int experience = Convert.ToInt32(Console.ReadLine());
 
-         if (salary < 0)
+         if (salary <= 0)
         {
-            Console.WriteLine("Error: Salary cannot be negative.");
+            Console.WriteLine("Error: Salary cannot be negative or Zero.");
             return;
         }
 
@@ -38,3 +38,4 @@ class Program
     }
 
 }
+
