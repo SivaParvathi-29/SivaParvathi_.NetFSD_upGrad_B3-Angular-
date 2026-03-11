@@ -13,6 +13,12 @@ class Program
         Console.Write("Enter Experience (years): ");
         int experience = Convert.ToInt32(Console.ReadLine());
 
+         if (salary < 0)
+        {
+            Console.WriteLine("Error: Salary cannot be negative.");
+            return;
+        }
+
         double bonusPercentage;
 
         if (experience < 2)
@@ -30,4 +36,5 @@ class Program
         Console.WriteLine("Bonus: " + bonus);
         Console.WriteLine("Final Salary: " + finalSalary);
     }
+
 }
