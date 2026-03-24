@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=DESKTOP-R2AC7BS\\SQLEXPRESS;Database=ProductsDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}
