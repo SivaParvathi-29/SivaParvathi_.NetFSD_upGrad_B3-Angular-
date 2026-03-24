@@ -48,3 +48,11 @@ BEGIN
     DELETE FROM Products WHERE ProductId=@ProductId;
 END
 
+
+CREATE PROCEDURE GetProductById
+    @ProductId INT
+AS
+BEGIN
+   Select * FROM Products WHERE ProductId=@ProductId;
+END
+
