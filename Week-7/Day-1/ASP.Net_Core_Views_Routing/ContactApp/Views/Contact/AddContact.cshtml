@@ -1,0 +1,47 @@
+﻿@model WebApplication1.Models.ContactInfo
+
+<h2 class="text-center">Add Contact</h2>
+
+<div class="container mt-4">
+    <form method="post" class="border p-4 shadow rounded">
+
+        <div class="mb-3">
+            <label>Contact Id</label>
+            <input asp-for="ContactId" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>First Name</label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Last Name</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Company</label>
+            <input asp-for="CompanyName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input asp-for="EmailId" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Mobile</label>
+            <input asp-for="MobileNo" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Designation</label>
+            <input asp-for="Designation" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/Contact/ShowContacts" class="btn btn-secondary">Back</a>
+
+    </form>
+</div>
