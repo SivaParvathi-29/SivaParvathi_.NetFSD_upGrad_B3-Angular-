@@ -1,0 +1,10 @@
+﻿@model ProductApp1.Models.Product
+
+<form method="post">
+    <input type="hidden" asp-for="ProductId" />
+    Name: <input asp-for="ProductName" /><br />
+    Price: <input asp-for="Price" /><br />
+    Category: <input asp-for="Category" /><br />
+
+    <button type="submit">Update</button>
+</form>
