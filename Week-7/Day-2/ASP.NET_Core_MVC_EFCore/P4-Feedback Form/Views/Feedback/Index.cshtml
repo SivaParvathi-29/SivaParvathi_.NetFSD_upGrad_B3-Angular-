@@ -1,0 +1,23 @@
+﻿<h2>Feedback Form</h2>
+
+<form method="post" action="/feedback/submit">
+    <p>
+        Name:<br />
+        <input type="text" name="name" />
+    </p>
+
+    <p>
+        Comments:<br />
+        <input type="text" name="comments" />
+    </p>
+
+    <p>
+        Rating:<br />
+        <input type="number" name="rating" />
+    </p>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<h3>@ViewData["Message"]</h3>

@@ -1,0 +1,18 @@
+﻿<h2>Simple Calculator</h2>
+
+<hr/>
+<form method="post" action="/calc/add">
+ <p>
+             Number 1: <br />
+             <input type="number" name="num1" required />  
+ <p/>
+
+ <p>
+            Number 2: <br />
+            <input type="number" name="num2" required/>
+  <p />
+
+    <button type="submit">Add</button>
+</form>
+
+<h3>Result: @ViewData["Result"]</h3>
