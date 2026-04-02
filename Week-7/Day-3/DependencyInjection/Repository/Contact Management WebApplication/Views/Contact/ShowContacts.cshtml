@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<WebApplication1.Models.ContactInfo>
+
+<h2 style="text-align:center;">Contact List</h2>
+
+<div style="margin-bottom:10px;">
+    <a href="/Contact/AddContact" style="padding:6px 12px; background-color:green; color:white; text-decoration:none;">
+        Add Contact
+    </a>
+</div>
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;">
+    <tr style="background-color:lightgray;">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Designation</th>
+    </tr>
+
+    @if (Model.Count > 0)
+    {
+        foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.ContactId</td>
+                <td>@c.FirstName @c.LastName</td>
+                <td>@c.CompanyName</td>
+                <td>@c.EmailId</td>
+                <td>@c.MobileNo</td>
+                <td>@c.Designation</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6" style="text-align:center; color:red;">
+                No contacts available
+            </td>
+        </tr>
+    }
+</table>
