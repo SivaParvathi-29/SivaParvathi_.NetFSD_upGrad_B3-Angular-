@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<WebApplication5.Models.ContactInfo>
+
+<h2 style="text-align:center; margin-top:20px;">Contact List</h2>
+
+<div style="width:90%; margin:auto;">
+
+    <a href="/contact/add"
+           style="display:inline-block; margin:10px 0; padding:10px 15px;
+        background:green; color:white; text-decoration:none; border-radius:5px;">
+        + Add Contact
+    </a>
+
+    <table style="width:100%; border-collapse:collapse; text-align:center;
+        box-shadow:0px 0px 10px #ccc;">
+
+        <tr style="background:#007bff; color:white;">
+            <th style="padding:10px;">Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Company</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr style="border-bottom:1px solid #ddd;">
+                <td>@item.ContactId</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.EmailId</td>
+                <td>@item.MobileNo</td>
+                <td>@item.CompanyId</td>
+                <td>@item.DepartmentId</td>
+                <td>
+                    <a href="/contact/edit/@item.ContactId"
+                       style="color:blue; margin-right:10px;">Edit</a>
+
+                    <a href="/contact/delete/@item.ContactId"
+                       style="color:red;"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

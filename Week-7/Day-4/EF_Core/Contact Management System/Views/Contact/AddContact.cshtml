@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WebApplication5.Models.ContactInfo
+
+<h2 style="text-align:center;">Add Contact</h2>
+
+<div style="width:40%; margin:auto; padding:20px;
+    box-shadow:0px 0px 10px #ccc; border-radius:10px;">
+
+    <form method="post" action="/contact/add">
+
+        <input asp-for="FirstName" placeholder="First Name"
+               style="width:100%; padding:8px; margin:5px 0;" />
+        
+        <input asp-for="LastName" placeholder="Last Name"
+               style="width:100%; padding:8px; margin:5px 0;" />
+
+        <input asp-for="EmailId" placeholder="Email"
+               style="width:100%; padding:8px; margin:5px 0;" />
+
+        <input asp-for="MobileNo" placeholder="Mobile"
+               style="width:100%; padding:8px; margin:5px 0;" />
+
+        <input asp-for="Designation" placeholder="Designation"
+               style="width:100%; padding:8px; margin:5px 0;" />
+
+        <select asp-for="CompanyId"
+                style="width:100%; padding:8px; margin:5px 0;">
+            <option>Select Company</option>
+            @foreach (var c in ViewBag.Companies)
+            {
+                <option value="@c.CompanyId">@c.CompanyName</option>
+            }
+        </select>
+
+        <select asp-for="DepartmentId"
+                style="width:100%; padding:8px; margin:5px 0;">
+            <option>Select Department</option>
+            @foreach (var d in ViewBag.Departments)
+            {
+                <option value="@d.DepartmentId">@d.DepartmentName</option>
+            }
+        </select>
+
+        <button type="submit"
+                style="width:100%; padding:10px; background:green;
+            color:white; border:none; margin-top:10px;">
+            Save
+        </button>
+
+    </form>
+</div>m>

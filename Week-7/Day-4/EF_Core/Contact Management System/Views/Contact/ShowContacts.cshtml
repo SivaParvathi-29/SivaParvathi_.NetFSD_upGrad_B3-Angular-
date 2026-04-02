@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<WebApplication5.Models.ContactInfo>
+
+<h2>Contacts</h2>
+<a href="/contact/add">Add Contact</a>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Department</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FirstName @item.LastName</td>
+            <td>@item.Company?.CompanyName</td>
+            <td>@item.Department?.DepartmentName</td>
+            <td>
+                <a href="/contact/edit/@item.ContactId">Edit</a>
+                <a href="/contact/delete/@item.ContactId">Delete</a>
+                <a href="/contact/details/@item.ContactId">View</a>
+            </td>
+        </tr>
+    }
+</table>

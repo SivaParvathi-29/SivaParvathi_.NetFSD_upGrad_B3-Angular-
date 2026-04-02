@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model WebApplication4.Models.Student
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4>Add Student</h4>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="Create">
+
+                <div class="mb-3">
+                    <label class="form-label">Student Name</label>
+                    <input asp-for="StudentName" class="form-control" placeholder="Enter name" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Course</label>
+                    <select asp-for="CourseId" class="form-select">
+                        <option value="">-- Choose Course --</option>
+                        @foreach (var c in ViewBag.Courses)
+                        {
+                            <option value="@c.CourseId">@c.CourseName</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+            </form>
+        </div>
+    </div>
+
+</div>
