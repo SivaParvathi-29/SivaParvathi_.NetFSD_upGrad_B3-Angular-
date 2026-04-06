@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WebApplication3.Models.ContactInfo
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Add Contact</h2>
+
+    <form method="post" class="card p-4 shadow">
+
+        <div class="row mb-3">
+            <div class="col">
+                <input class="form-control" name="FirstName" placeholder="First Name" />
+            </div>
+            <div class="col">
+                <input class="form-control" name="LastName" placeholder="Last Name" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <input class="form-control" name="EmailId" placeholder="Email" />
+        </div>
+
+        <div class="mb-3">
+            <input class="form-control" name="MobileNo" placeholder="Mobile" />
+        </div>
+
+        <div class="mb-3">
+            <input class="form-control" name="Designation" placeholder="Designation" />
+        </div>
+
+        <div class="mb-3">
+            <label>Company</label>
+            <select class="form-control" name="CompanyId">
+                @foreach (var c in ViewBag.Companies)
+                {
+                    <option value="@c.CompanyId">@c.CompanyName</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Department</label>
+            <select class="form-control" name="DepartmentId">
+                <option value="">--Select--</option>
+                @foreach (var d in ViewBag.Departments)
+                {
+                    <option value="@d.DepartmentId">@d.DepartmentName</option>
+                }
+            </select>
+        </div>
+
+        <button class="btn btn-success">Save</button>
+        <a href="/contact" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

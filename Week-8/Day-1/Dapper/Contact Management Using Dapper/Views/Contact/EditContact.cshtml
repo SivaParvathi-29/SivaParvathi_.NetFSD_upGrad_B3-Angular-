@@ -1,0 +1,84 @@
+﻿@model WebApplication3.Models.ContactInfo
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-primary mb-4">Edit Contact</h2>
+
+        <form method="post">
+
+            <input type="hidden" name="ContactId" value="@Model.ContactId" />
+
+            <!-- First & Last Name -->
+            <div class="row mb-3">
+                <div class="col">
+                    <input class="form-control" type="text" name="FirstName" value="@Model.FirstName" placeholder="First Name" />
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" name="LastName" value="@Model.LastName" placeholder="Last Name" />
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <input class="form-control" type="email" name="EmailId" value="@Model.EmailId" placeholder="Email" />
+            </div>
+
+            <!-- Mobile -->
+            <div class="mb-3">
+                <input class="form-control" type="number" name="MobileNo" value="@Model.MobileNo" placeholder="Mobile" />
+            </div>
+
+            <!-- Designation -->
+            <div class="mb-3">
+                <input class="form-control" type="text" name="Designation" value="@Model.Designation" placeholder="Designation" />
+            </div>
+
+            <!-- Company -->
+            <div class="mb-3">
+                <label class="fw-bold">Company</label>
+                <select class="form-control" name="CompanyId">
+                    @foreach (var c in ViewBag.Companies)
+                    {
+                        if (c.CompanyId == Model.CompanyId)
+                        {
+                            <option value="@c.CompanyId" selected="selected">@c.CompanyName</option>
+                        }
+                        else
+                        {
+                            <option value="@c.CompanyId">@c.CompanyName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- Department -->
+            <div class="mb-3">
+                <label class="fw-bold">Department</label>
+                <select class="form-control" name="DepartmentId">
+                    @foreach (var d in ViewBag.Departments)
+                    {
+                        if (d.DepartmentId == Model.DepartmentId)
+                        {
+                            <option value="@d.DepartmentId" selected="selected">@d.DepartmentName</option>
+                        }
+                        else
+                        {
+                            <option value="@d.DepartmentId">@d.DepartmentName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success px-4">Update</button>
+                <a href="/Contact/ShowContacts" class="btn btn-secondary">Back</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
