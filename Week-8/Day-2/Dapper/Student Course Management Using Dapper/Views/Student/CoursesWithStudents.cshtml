@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using StudentCourseApp.Models
+@model List<Course>
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Courses with Students</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow">
+            
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Course Name</th>
+                    <th>Students</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int count = 1;
+                }
+
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td class="text-center">@count</td>
+
+                        <td class="fw-bold text-success">
+                             @course.CourseName
+                        </td>
+
+                        <td>
+                            @if (course.Students != null && course.Students.Count > 0)
+                            {
+                                <ul class="mb-0">
+                                    @foreach (var student in course.Students)
+                                    {
+                                        <li> @student.StudentName</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No students enrolled</span>
+                            }
+                        </td>
+                    </tr>
+
+                    count++;
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
